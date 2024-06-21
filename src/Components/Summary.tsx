@@ -1,4 +1,4 @@
-const Summary = ({firstname, lastname,email,age,guest,guestname}) => {
+const Summary = () => {
   return (
     <div>Summary</div>
   )
