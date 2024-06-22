@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Form.css"; 
-import useFormValidation, { Data } from "../Components/userFormValidation";
+import useFormValidation, { Data } from "./userFormValidation";
 
 export const Form = () => {
   const { register, handleSubmit, errors, watch } = useFormValidation();
