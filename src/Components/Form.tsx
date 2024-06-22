@@ -3,35 +3,29 @@ import {
   Button,
   TextField,
   Typography,
-  FormControlLabel,
-  Radio,
-  RadioGroup,
+  MenuItem,
+  Select,
+  InputLabel,
+  FormControl,
 } from "@mui/material";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import './Form.css';
+import "./Form.css"; // Import the CSS file
+import useFormValidation, { Data } from "../Components/userFormValidation";
 
 export const Form = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [age, setAge] = useState("");
-  const [guest, setGuest] = useState(false);
-  const [guestName, setGuestName] = useState("");
+  const { register, handleSubmit, errors, watch } = useFormValidation();
   const navigate = useNavigate();
-  const [selectedValue, setSelectedValue] = useState("No");
 
-  function handleSubmit(event: any) {
-    event.preventDefault();
+  const onSubmit = (data: Data) => {
+    console.log(data);
     toast.success("Registration successful! Redirecting...");
-
-    setTimeout(() => navigate("/summary"), 4000);
-  }
+    setTimeout(() => navigate("/summary", { state: data }), 4000);
+  };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <ToastContainer autoClose={4000} position="top-center" newestOnTop />
 
       <Box
@@ -42,7 +36,7 @@ export const Form = () => {
           border: 0.1,
           borderColor: "grey.400",
           borderRadius: 5,
-          gap: 1,
+          gap: 2,
           padding: 2,
           color: "black",
           backgroundColor: "rgba(255, 255, 255, 0.8)",
@@ -59,84 +53,69 @@ export const Form = () => {
           }}
         >
           <TextField
-            style={{ marginBottom: 10 }}
-            onChange={(e) => {
-              setFirstName(e.target.value);
-            }}
             fullWidth
             required
             label="First Name"
-            name="firstname"
+            {...register("firstName")}
+            error={!!errors.firstName}
+            helperText={errors.firstName?.message}
           />
+
           <TextField
-            style={{ marginBottom: 10 }}
-            onChange={(e) => {
-              setLastName(e.target.value);
-            }}
             fullWidth
             required
             label="Last Name"
-            name="lastname"
+            {...register("lastName")}
+            error={!!errors.lastName}
+            helperText={errors.lastName?.message}
           />
         </Box>
         <TextField
-          style={{ marginBottom: 10 }}
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
           fullWidth
           required
           label="Email"
-          name="email"
+          {...register("email")}
+          error={!!errors.email}
+          helperText={errors.email?.message}
         />
 
         <TextField
-          style={{ marginBottom: 10 }}
-          onChange={(e) => {
-            setAge(e.target.value);
-          }}
           fullWidth
           required
           label="Age"
-          name="age"
+          {...register("age", { valueAsNumber: true })}
+          error={!!errors.age}
+          helperText={errors.age?.message}
         />
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Typography variant="h6">Are you attending with a guest?</Typography>
-
-          <RadioGroup
-            value={selectedValue}
-            onChange={(e) => {
-              setSelectedValue(e.target.value);
-              setGuest(e.target.value === "Yes");
-            }}
-            row
+        <FormControl fullWidth>
+          <InputLabel id="guest-label">
+            Are you attending with a guest?
+          </InputLabel>
+          <Select
+            labelId="guest-label"
+            {...register("guest")}
+            label="Are you attending with a guest?"
+            defaultValue=""
+            required
           >
-            <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-            <FormControlLabel value="No" control={<Radio />} label="No" />
-          </RadioGroup>
-        </Box>
+            <MenuItem value="Yes">Yes</MenuItem>
+            <MenuItem value="No">No</MenuItem>
+          </Select>
+        </FormControl>
 
-        <Box className={`guest-name-box ${guest ? 'show' : ''}`} >
-          {guest && (
-            <TextField
-              style={{ marginBottom: 10 }}
-              onChange={(e) => {
-                setGuestName(e.target.value);
-              }}
-              fullWidth
-              required
-              label="Guest Name"
-              name="guestname"
-            />
-          )}
-        </Box>
+        {watch("guest") === "Yes" && (
+          <TextField
+            fullWidth
+            required
+            className={`guest-name-box ${
+              watch("guest") === "Yes" ? "show" : ""
+            }`}
+            label="Guest Name"
+            {...register("guestName")}
+            error={!!errors.guestName}
+            helperText={errors.guestName?.message}
+          />
+        )}
 
         <Button variant="contained" type="submit">
           Submit
