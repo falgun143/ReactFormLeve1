@@ -7,6 +7,6 @@
 
 .guest-name-box.show {
   opacity:1;
-  max-height: 100px; /* Adjust as needed */
+  max-height: 100px; 
   min-width: 100%;
 }

@@ -2,24 +2,43 @@ import { useLocation } from "react-router-dom";
 import { Typography, Box } from "@mui/material";
 
 const Summary = () => {
-  const location = useLocation();
+    const location = useLocation();
   const { firstName, lastName, email, age, guest, guestName } =
     location.state || {};
 
   return (
     <Box
       sx={{
-        maxWidth: 750,
-        padding: 3,
+        maxWidth: {
+          xs: 290, // Maximum width on extra small screens (viewport width < 600px)
+          sm: 450, // Maximum width on small screens (viewport width >= 600px)
+          md: 550, // Maximum width on medium screens (viewport width >= 960px)
+          lg: 650, // Maximum width on large screens (viewport width >= 1280px)
+          xl: 750, // Maximum width on extra large screens (viewport width >= 1920px)
+        },
+        minHeight: {
+          xs: 600, // Maximum width on extra small screens (viewport width < 600px)
+          sm: 470, // Maximum width on small screens (viewport width >= 600px)
+          md: 490, // Maximum width on medium screens (viewport width >= 960px)
+          lg: 400, // Maximum width on large screens (viewport width >= 1280px)
+          xl: 380, // Maximum width on extra large screens (viewport width >= 1920px)
+        },
+        boxSizing: "border-box",
+        padding: 2,
         backgroundColor: "#14c276",
         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
         border: "1px solid #ddd",
         borderRadius: 3,
         color: "#FBF9F1",
-        lineHeight: 1.5,
+        lineHeight: 4,
       }}
     >
-      <Typography variant="h3" fontWeight={"500"}>
+      <Typography
+      variant="h4"
+        fontWeight={"bold"} 
+        marginTop={2} 
+        align="center"
+      >
         Event Registration Confirmation
       </Typography>
 
@@ -30,7 +49,7 @@ const Summary = () => {
         Thank you for registering for our event. We are pleased to confirm your
         registration with the following details:
       </Typography>
-      <Typography variant="subtitle1" fontWeight={"bold"}>
+      <Typography variant="subtitle1" fontWeight="bold" color="#FEFFD2">
         - Email: {email}
         <br />- Age: {age}
         <br />- Attending with Guest: {guest === "Yes" ? "Yes" : "No"}
