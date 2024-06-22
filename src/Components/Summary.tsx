@@ -10,7 +10,7 @@ const Summary = () => {
     <Box
       sx={{
         maxWidth: {
-          xs: 400, // Maximum width on extra small screens (viewport width < 600px)
+          xs: 380, // Maximum width on extra small screens (viewport width < 600px)
           sm: 450, // Maximum width on small screens (viewport width >= 600px)
           md: 550, // Maximum width on medium screens (viewport width >= 960px)
           lg: 650, // Maximum width on large screens (viewport width >= 1280px)
