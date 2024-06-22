@@ -10,18 +10,18 @@ const Summary = () => {
     <Box
       sx={{
         maxWidth: {
-          xs: 290, // Maximum width on extra small screens (viewport width < 600px)
+          xs: 400, // Maximum width on extra small screens (viewport width < 600px)
           sm: 450, // Maximum width on small screens (viewport width >= 600px)
           md: 550, // Maximum width on medium screens (viewport width >= 960px)
           lg: 650, // Maximum width on large screens (viewport width >= 1280px)
           xl: 750, // Maximum width on extra large screens (viewport width >= 1920px)
         },
         minHeight: {
-          xs: 600, // Maximum width on extra small screens (viewport width < 600px)
+          xs: 530, // Maximum width on extra small screens (viewport width < 600px)
           sm: 470, // Maximum width on small screens (viewport width >= 600px)
           md: 490, // Maximum width on medium screens (viewport width >= 960px)
           lg: 400, // Maximum width on large screens (viewport width >= 1280px)
-          xl: 380, // Maximum width on extra large screens (viewport width >= 1920px)
+          xl: 420, // Maximum width on extra large screens (viewport width >= 1920px)
         },
         boxSizing: "border-box",
         padding: 2,
