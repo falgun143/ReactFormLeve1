@@ -1,5 +1,5 @@
-import {Form } from  "./Components/EventForm"
-import Summary  from  "../src/Components/Summary"
+import {Form } from  "./components/EventForm"
+import Summary  from  "./components/Summary"
 import './App.css'
 import {   Routes, Route } from 'react-router-dom';
 

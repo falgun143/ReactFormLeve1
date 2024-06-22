@@ -25,11 +25,11 @@ const Summary = () => {
         },
         boxSizing: "border-box",
         padding: 2,
-        backgroundColor: "#14c276",
+        backgroundColor: "#EEF7FF",
         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
         border: "1px solid #ddd",
         borderRadius: 3,
-        color: "#FBF9F1",
+        color: "black",
         lineHeight: 4,
       }}
     >
@@ -49,7 +49,7 @@ const Summary = () => {
         Thank you for registering for our event. We are pleased to confirm your
         registration with the following details:
       </Typography>
-      <Typography variant="subtitle1" fontWeight="bold" color="#FEFFD2">
+      <Typography variant="subtitle1" fontWeight="bold" >
         - Email: {email}
         <br />- Age: {age}
         <br />- Attending with Guest: {guest === "Yes" ? "Yes" : "No"}

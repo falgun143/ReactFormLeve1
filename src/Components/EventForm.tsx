@@ -11,12 +11,13 @@ import {
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./Form.css"; 
-import useFormValidation, { Data } from "./userFormValidation";
-
+import "./EventForm.css"; 
+import useFormValidation, { Data } from "../components/userFormValidation";
+import EventRegistrationImage from "../../public/event.png"
 export const Form = () => {
   const { register, handleSubmit, errors, watch } = useFormValidation();
   const navigate = useNavigate();
+  const guest = watch("guest");
 
   const onSubmit = (data: Data) => {
     toast.success("Registration successful! Redirecting...");
@@ -44,16 +45,35 @@ export const Form = () => {
           borderColor: "grey.400",
           borderRadius: 2,
           gap: 2,
+          boxSizing:"border-box",
           padding: 2,
           color: "black",
-          backgroundColor: "rgba(255, 255, 255, 0.8)",
+          backgroundColor: "rgb(255, 255, 255)",
           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-          
         }}
       >
-        <Typography variant={"h4"} fontWeight="500" marginBottom={4} align="center">
-          Event Registration Form
+
+       <Box sx={{
+          display: "flex",
+          flexDirection: "column",
+          gap:1,
+          justifyContent: "center",
+          alignItems: "center",
+        }}>
+
+         <img src={EventRegistrationImage} alt="Job Registration" style={{ width:"80px" }} />
+
+         <Typography variant={"h4"} fontWeight="bold"  align="center" style={{color:"#151515"}} >
+          Event Registration Form 
         </Typography>
+        <Typography style={{fontSize:16, color: "#5b5b5b"}}  marginBottom={2} >
+       Let's get started. Are you ready to be part of 
+       <br></br>
+       something new? Then boldly move forward with us.
+        </Typography>
+     
+        </Box>
+      
         <Box
           sx={{
             display: "flex",
@@ -117,21 +137,18 @@ export const Form = () => {
           </Select>
         </FormControl>
 
-        {watch("guest") === "Yes" && (
+        <div style={{width: '100%'}}   className={`guest-name-box ${guest === "Yes"  ? "show" : ""}`}>
           <TextField
             fullWidth
-            className={`guest-name-box ${
-              watch("guest") === "Yes" ? "show" : ""
-            }`}
-            label="Guest Name"
-            defaultValue={"  "}
+            label="GuestName"
             {...register("guestName", { required: false })}
+            defaultValue={"  "}
             error={!!errors.guestName}
             helperText={errors.guestName?.message}
           />
-        )}
+        </div>
 
-        <Button variant="contained" type="submit" fullWidth={true} >
+        <Button variant="contained" type="submit" style={{maxWidth: '300px', maxHeight: '35px', minWidth: '250px', minHeight: '30px',backgroundColor:"#FFDC00",fontSize:"17px",fontWeight:"bold",color:"black"}} >
           Submit
         </Button>
       </Box>
